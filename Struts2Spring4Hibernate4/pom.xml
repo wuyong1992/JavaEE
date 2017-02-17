@@ -7,6 +7,23 @@
 	<packaging>war</packaging>
 	<name>Struts2Spring4Hibernate4</name>
 
+	<!-- 可以解决one or more constraints have not been satisfied问题 -->
+	<profiles>
+		<profile>
+			<id>jdk-1.8</id>
+			<!-- 另外一种激活方式 -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<jdk>1.8</jdk>
+			</activation>
+			<properties>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+			</properties>
+		</profile>
+	</profiles>
+
 	<!-- 定义使用框架的版本信息，单独提取出来，以方便升级 -->
 	<properties>
 		<struts.version>2.3.31</struts.version>

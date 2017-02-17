@@ -28,24 +28,20 @@ public class UsersDaoImpl extends HibernateDaoSupport implements UsersDao {
 	 }
 	 
 	
-	@Override
 	public Long insert(Users users){
 		return (Long)this.getCurrentSession().save(users);
 	}
 
-	@Override
 	public Long update(Users users){
 		this.getCurrentSession().update(users);
 		return 1L;
 	}
 
-	@Override
 	public Long delete(Long id){
 		this.getCurrentSession().delete(new Users(id));
 		return 1L;
 	}
 
-	@Override
 	public Users getUser(Long id){
 		return (Users)this.getCurrentSession().get(Users.class, id);
 	}
@@ -53,7 +49,6 @@ public class UsersDaoImpl extends HibernateDaoSupport implements UsersDao {
 
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Users> getUsersList(Users users){	
 		String hql = "from Users where 1 = 1";
 		if(users.getId() != null){
@@ -89,7 +84,6 @@ public class UsersDaoImpl extends HibernateDaoSupport implements UsersDao {
 	
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public int getUsersCount(Users users) {
 		Criteria c = this.getCurrentSession().createCriteria(Users.class);
 		if(users.getId() != null){
@@ -112,7 +106,6 @@ public class UsersDaoImpl extends HibernateDaoSupport implements UsersDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Users> getUsersPaginatedList(Users users, int first, int count) {
 		Criteria c = this.getCurrentSession().createCriteria(Users.class);
 		if(users.getId() != null){
