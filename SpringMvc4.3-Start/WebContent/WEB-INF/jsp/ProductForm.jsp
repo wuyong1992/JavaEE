@@ -11,6 +11,9 @@
 	<form action="product_saveAll.action" method="post">
 	<fieldset>
 		<legend>Add a product</legend>
+		<%-- <label for="id">Product Name:</label>
+		<input type="hidden"  id="id" name="id" value="${id}" tabindex="1" /> --%>
+		
 		<label for="name">Product Name:</label>
 		<input type="text"  id="name" name="name" value="" tabindex="1" />
 		
