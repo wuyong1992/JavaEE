@@ -15,6 +15,7 @@
 		Product Name:${product.name} <br />
 		Description:${product.description} <br /> 
 		Price:￥${product.price} <br />
+		Count:${product.count} <br />
 	</div>
 </body>
 </html>

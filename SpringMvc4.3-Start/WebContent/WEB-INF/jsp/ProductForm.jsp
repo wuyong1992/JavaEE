@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div>
-	<form action="product_save.action" method="post">
+	<form action="product_saveAll.action" method="post">
 	<fieldset>
 		<legend>Add a product</legend>
 		<label for="name">Product Name:</label>
@@ -19,6 +19,9 @@
 		
 		<label for="price">Price:</label>
 		<input type="text"  id="price" name="price" value="" tabindex="3" />
+		
+		<label for="count">Count:</label>
+		<input type="text"  id="count" name="count" value="" tabindex="4" />
 		
 		<div id="buttons">
 		<label for="dummy" > </label>

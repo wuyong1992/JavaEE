@@ -18,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setName("MiBook");
 		product.setDescription("MiBook write code is very cool!");
 		product.setPrice(4999.0d);
+		product.setCount(100);
 		add(product);
 	}
 	
@@ -35,4 +36,21 @@ public class ProductServiceImpl implements ProductService {
 	public Product get(long id) {
 		return products.get(id);
 	}
+
+	@Override
+	public Map<Long, Product> getAll() {
+		return products;
+	}
+	
+	@Override
+	public Map<Long, Product> del(long id) {
+		
+		products.remove(id);
+		return products;
+	}
+	
+	
+	
+	
+	
 }
