@@ -3,11 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <title>SpringMVC Home Page</title>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<!-- 动态改变a链接穿的id值 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#a").bind("click",function(){
+                var v=$("#productID").val();
+                var link="product_retrieve.action?id="+v;
+                $("#a").attr("href",link);
+            })
+        });
+    </script>
 </head>
 <body>
 	<h1>Hello SpringMVC!</h1>
 	<a href="product_input.action">进入商品添加系统</a>
-	<a href="product_view/2.action">进入单个商品信息列表</a>
 	<a href="products_view/all.action">进入所有商品信息列表</a>
+	<hr>
+	<input type="text" value="" id="productID" placeholder="请输入商品的id值，例如：1" onKeyUp="value=value.replace(/[^\d]/g,'')" >
+	<a href="" id="a">查看单个商品信息</a>
 </body>
 </html>
