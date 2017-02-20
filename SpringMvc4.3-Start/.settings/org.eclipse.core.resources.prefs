@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding/<project>=UTF-8
+=======
 encoding//WebContent/WEB-INF/jsp/AllProduct.jsp=UTF-8
+>>>>>>> 25a802bec51c9a5038f957d0b86a5bbf06337c0c

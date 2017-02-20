@@ -81,7 +81,8 @@ public class ProductController {
 	 */
 
 	@RequestMapping(value = "/product_saveAll", method = RequestMethod.POST)
-	public String saveAllProduct(ProductForm productForm, RedirectAttributes redirectAttributes) {
+	public String saveAllProduct(ProductForm productForm, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
 		logger.info("saveAllProduct 被调用！");
 
 		Product product = new Product();
@@ -124,7 +125,9 @@ public class ProductController {
 
 	@RequestMapping(value = "/products_view/product_del")
 	public String del(Long id, HttpServletRequest request, Model model) {
+		//取出所有的map
 		Map<Long, Product> products = (Map<Long, Product>) request.getSession().getAttribute("products");
+		//遍历checkbook中的value值，并循环删除
 		String[] ids = request.getParameterValues("checkID");
 		if (ids.length > 0) {
 			for (int i = 0; i < ids.length; i++) {
@@ -145,13 +148,44 @@ public class ProductController {
 	 */
 	@RequestMapping(value = "/products_view/product_update")
 	public String update(Long id, HttpServletRequest request, Model model) {
-		Map<Long, Product> products = (Map<Long, Product>) request.getSession().getAttribute("products");
-		
-		Product productNeedUpadate = productService.get(id);
-		products.remove(id);
-		
+		//获取a标签传递的id值，并将其放入session
+		request.getSession().setAttribute("id", id);
 		return "ProductUpdate";
-
 	}
 
+	@RequestMapping(value = "/products_view/product_update_view", method = RequestMethod.POST)
+	public String ProductUpdate(ProductForm productForm, HttpServletRequest request) {
+		logger.info("saveAllProduct 被调用！");
+		//取出session中的值，取出所有map
+		Long id = (Long) request.getSession().getAttribute("id");
+		Map<Long, Product> products = (Map<Long, Product>) request.getSession().getAttribute("products");
+		//根据session中id值找出对应实体
+		Product productNeedUpadate = productService.get(id);
+		//逐个判断有么有更改输入框的值，有则重新赋值，没有跳过
+		if (productForm.getName() != null) {
+			productNeedUpadate.setName(productForm.getName());
+		}
+		if (productForm.getDescription() != null) {
+			productNeedUpadate.setDescription(productForm.getDescription());
+		}
+		if (productForm.getPrice() != null) {
+			try {
+				productNeedUpadate.setPrice(Double.parseDouble(productForm.getPrice()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (productForm.getCount() != null) {
+			try {
+				productNeedUpadate.setCount(Integer.parseInt(productForm.getPrice()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 先删后放
+		products = productService.del(id);
+		products.put(id, productNeedUpadate);
+		return "redirect:/products_view/all.action";
+
+	}
 }
