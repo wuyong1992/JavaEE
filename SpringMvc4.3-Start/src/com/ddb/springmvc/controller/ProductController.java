@@ -150,6 +150,11 @@ public class ProductController {
 	public String update(Long id, HttpServletRequest request, Model model) {
 		//获取a标签传递的id值，并将其放入session
 		request.getSession().setAttribute("id", id);
+		Product productNeedUpadate = productService.get(id);
+		request.getSession().setAttribute("name", productNeedUpadate.getName());
+		request.getSession().setAttribute("description", productNeedUpadate.getDescription());
+		request.getSession().setAttribute("price", productNeedUpadate.getPrice());
+		request.getSession().setAttribute("count", productNeedUpadate.getCount());
 		return "ProductUpdate";
 	}
 
@@ -162,26 +167,42 @@ public class ProductController {
 		//根据session中id值找出对应实体
 		Product productNeedUpadate = productService.get(id);
 		//逐个判断有么有更改输入框的值，有则重新赋值，没有跳过
-		if (productForm.getName() != null) {
+		if (productForm.getName() != "") {
 			productNeedUpadate.setName(productForm.getName());
+		}else {
+			productNeedUpadate.setName(productNeedUpadate.getName());
 		}
-		if (productForm.getDescription() != null) {
+		
+		
+		if (productForm.getDescription() != "") {
 			productNeedUpadate.setDescription(productForm.getDescription());
+		}else {
+			productNeedUpadate.setDescription(productNeedUpadate.getDescription());
 		}
+		
+		
 		if (productForm.getPrice() != null) {
 			try {
 				productNeedUpadate.setPrice(Double.parseDouble(productForm.getPrice()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else {
+			productNeedUpadate.setPrice(productNeedUpadate.getPrice());
 		}
+		
+		
 		if (productForm.getCount() != null) {
 			try {
-				productNeedUpadate.setCount(Integer.parseInt(productForm.getPrice()));
+				productNeedUpadate.setCount(Integer.parseInt(productForm.getCount()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else {
+			productNeedUpadate.setCount(productNeedUpadate.getCount());
 		}
+		
+		
 		// 先删后放
 		products = productService.del(id);
 		products.put(id, productNeedUpadate);
