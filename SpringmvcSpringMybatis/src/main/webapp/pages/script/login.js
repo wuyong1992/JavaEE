@@ -45,8 +45,9 @@ $("#btnLogin").click(function() {
 				setLocalStorage("shopNo", res.shopNo);
 				setLocalStorage("shopId", res.id);
 				setLocalStorage("shopInfo", JSON.stringify(res));
-
+				
 				showmsg("恭喜你，登录成功！");
+				window.location.href="http://localhost:8080/SpringmvcSpringMybatis/jsp/loginSuccess.jsp";
 
 			} else {
 				showmsg("用户名或密码错误");
