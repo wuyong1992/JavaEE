@@ -7,8 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/jsp/add.jsp">add</a>
-<a href="<%=request.getContextPath()%>/studentList.action">studentList</a>
-<a href="<%=request.getContextPath()%>/jsp/likeSelect.jsp">查询</a>
+<form action="<%=request.getContextPath()%>/add.action" method="post">
+	姓名：<input type="text" name="name">	<br>
+	年龄：<input type="text" name="age">	<br>
+	性别<input type="text" name="sex">	<br>
+	<input type="submit" value="提交">
+	<input type="reset" value="重置">
+</form>
 </body>
 </html>

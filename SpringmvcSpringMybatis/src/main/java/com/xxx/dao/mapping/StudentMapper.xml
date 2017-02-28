@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxx.dao.StudentMapper">
+	<resultMap id="BaseResultMap" type="Student">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		 id, name,age,sex
+	</sql>
+	
+	<!-- 添加 -->
+	<insert id="addStudent" parameterType="Student">
+    	insert into student(name,age,sex) values(#{name},#{age},#{sex})
+   	</insert>
+	
+	<!-- 查询所有 -->
+	<select id="selectAllStudent" resultType="Student">  
+        select * from student  
+    </select>  
+    
+    <!-- 根据学生id删除该条信息 -->
+    <delete id="deleteStudentById" parameterType="Integer">
+    	delete from student where id=#{id}
+   	</delete>
+   	
+   	<!-- 根据id找到对应信息 -->
+   	<select id="selectStudentById" parameterType="Integer" resultType="Student">  
+        select * from student where id=#{id}
+    </select>
+    
+    <!-- 根据id修改对应信息 -->
+	<update id="updateStudentById" parameterType="Student">
+    	update student set name=#{name},age=#{age},sex=#{sex} where id=#{id}
+    	<!-- <set>
+    		<if test="name!=null">
+    			name=#{name}
+    		</if>
+    		<if test="age!=null">
+    			age=#{age}
+    		</if>
+    		<if test="sex!=null">
+    			sex=#{sex}
+    		</if>
+    	</set> -->
+    	<!-- where id=#{id} -->
+	</update >
+	
+	<!-- 模糊查询 -->
+	<select id="likeSelect" parameterType="Student" resultType="Student">
+		select * from student
+		<where>
+			<if test="id!=null and id!='' ">
+				and id=#{id}
+			</if>
+			<if test="name!=null and name!='' ">
+				and name like '%${name}%'
+			</if>
+			<if test="age!=null and age!='' ">
+				and age=#{age}
+			</if>
+			<if test="sex!=null and sex!='' ">
+				and sex=#{sex}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 批量修改 -->
+	<!-- <update id="updaeAll" parameterType="java.util.List">
+		update student
+		<set>
+			<if test="name">
+			
+			</if>
+		</set>
+	</update> -->
+	
+	
+	<!-- 批量删除 -->
+	<!-- <delete id="delectStudentsByIds" parameterType="java.lang.String">
+		delete from student
+		<where>
+			<foreach collection="ids" item="id" open="id in(" close=")" separator=",">
+				#{id}
+			</foreach>
+		</where>
+	</delete> -->
+
+	<!-- 根据门店编码和密码获取门店信息 -->
+	<!-- <select id="getByNoAndPwd" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from smi_shop_info
+		where shop_no = #{shopNo,jdbcType=VARCHAR} and shop_password = #{password,jdbcType=VARCHAR}
+	</select> -->
+
+</mapper>

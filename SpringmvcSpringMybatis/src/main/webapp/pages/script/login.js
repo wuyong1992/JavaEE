@@ -26,7 +26,7 @@ $("#btnLogin").click(function() {
 	$.ajax({
 		type : "POST",
 		async : true,
-		url : ctx + "/login.do",
+		url : ctx + "/login.action",
 		data : {
 			"shopNo" : username,
 			"password" : password

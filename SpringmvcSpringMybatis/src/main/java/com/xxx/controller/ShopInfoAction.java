@@ -40,7 +40,7 @@ public class ShopInfoAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/login.do")
+	@RequestMapping(value = "/login")
 	public @ResponseBody ShopInfoVO login(HttpServletRequest request,HttpServletResponse response,String shopNo,String password) throws Exception {
 		
 		SmiShopInfo shopInfo = smiShopInfoService.getShopByNoAndPwd(shopNo, password);
